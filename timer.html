@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="timer-page">
+  
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="timer-display" id="timer">25:00</div>
+
+    <div class="controls">
+      <button id="start"><img src="assets/play.png"></button>
+      <button id="pause"><img src="assets/pause.png"></button>
+      <button id="reset"><img src="assets/stop.png"></button>
+    </div>
+
+    <div class="custom-time">
+      <label for="work">Work (min):</label>
+      <input type="number" id="work" value="25">
+      <label for="break">Break (min):</label>
+      <input type="number" id="break" value="5">
+      <button id="set-custom">Set Custom</button>
+    </div>
+
+    <!-- Bottom-right navigation buttons -->
+  <div class="fixed-bottom-right">
+    <button><img src="assets/home.png" alt="Home" onclick="location.href='index.html'"></button>
+    <button><img src="assets/todo.png" alt="To-Do" onclick="location.href='todo.html'"></button>
+  </div>
+
+  <script src="timer.js"></script>
+</body>
+</html>

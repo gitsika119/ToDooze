@@ -1,0 +1,220 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}/* === General Body === */
+
+body {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed; /* important */
+  height: 100vh; /* lock to viewport height */
+  width: 100vw; /* lock to viewport width */
+}
+
+.container {
+  margin-top: 60px; /* Gives space from top */
+  margin-left: 255px; /* Gives space from left */
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8); /* Optional: for contrast */
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 90%;
+  width: 500px;
+}
+
+/* === Night Mode === */
+body.night {
+  color: #eee;
+}
+
+/* === Page Specific Backgrounds (if needed dynamically) === */
+.home-page {
+  background: url('assets/homed.png') no-repeat center center fixed;
+  background-size: auto;
+}
+
+
+/* === Top-left Toggle Button === */
+.top-left {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.top-left img {
+  width: 80px;
+  height: 31.25px;
+  border-radius: 16px;
+
+}
+
+/* === Bottom Center Buttons (Home Page) === */
+.button-container {
+  position: absolute;
+  bottom: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 40px;
+  z-index: 5;
+}
+
+.button-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.button-container button:hover img {
+  transform: scale(1.1);
+  transition: transform 0.3s;
+}
+
+.button-container img {
+  width: 182px;
+  height: 54px;
+  border-radius: 16px;
+}
+
+/* === To-Do Input Area === */
+.todo-input {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#todo-input {
+  padding: 10px;
+  width: 60%;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+}
+
+#add-task {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* === To-Do List === */
+#todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+#todo-list li {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  margin: 10px auto;
+  width: 70%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* === Switch Toggle === */
+.switch-wrapper {
+  margin-top: 50px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px; width: 26px;
+  left: 4px; bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* === To-Do Buttons === */
+#todo-list li .btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+#todo-list li button {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#todo-list li button:hover {
+  background: #0b7dda;
+}
+
+#todo-list li.starred {
+  border: 2px solid gold;
+  font-weight: bold;
+}
+
+/* === Bottom-Right Fixed Buttons === */
+.fixed-bottom-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row; /* or column if you want vertical */
+  gap: 10px;
+  z-index: 9999; /* ensure it's above everything */
+  background: transparent; /* optional: no background */
+}
+
+.fixed-bottom-right button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.fixed-bottom-right img {
+  width: 40px;
+  height: 40px;
+}
+
+.fixed-bottom-right button:hover img {
+  transform: scale(1.1);
+  transition: transform 0.3s;
+}
