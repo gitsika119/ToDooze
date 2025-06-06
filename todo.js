@@ -78,7 +78,7 @@ function addTaskToDOM(taskObj) {
   list.appendChild(li);
 }
 
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
   applyTheme();
   loadTasks();
 
@@ -87,15 +87,15 @@ window.onload = () => {
   const addBtn = document.getElementById('add-task');
   const input = document.getElementById('todo-input');
 
-  homeBtn.onclick = () => window.location.href = 'index.html';
-  timerBtn.onclick = () => window.location.href = 'timer.html';
+  if (addBtn) {
+    addBtn.onclick = () => {
+      const task = input.value.trim();
+      if (task) {
+        addTaskToDOM({ text: task, starred: false });
+        saveTasks();
+        input.value = '';
+      }
+    };
+  }
+});
 
-  addBtn.onclick = () => {
-    const task = input.value.trim();
-    if (task) {
-      addTaskToDOM({ text: task, starred: false });
-      saveTasks();
-      input.value = '';
-    }
-  };
-};
