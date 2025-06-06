@@ -1,3 +1,7 @@
+* {
+  font-family: 'Pixelify Sans', cursive !important;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -107,6 +111,9 @@ body.night {
 }
 
 /* === To-Do List === */
+.task-text{
+  color:black;
+}
 #todo-list {
   list-style: none;
   padding: 0;
@@ -173,22 +180,25 @@ input:checked + .slider:before {
 }
 
 #todo-list li button {
-  background: #2196F3;
-  color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
+  background: transparent;
 }
 
 #todo-list li button:hover {
-  background: #0b7dda;
+  transform: scale(1.1);
 }
 
 #todo-list li.starred {
   border: 2px solid gold;
   font-weight: bold;
+}
+#todo-list li.done .task-text {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 /* === Bottom-Right Fixed Buttons === */
@@ -200,7 +210,7 @@ input:checked + .slider:before {
   flex-direction: row; /* or column if you want vertical */
   gap: 10px;
   z-index: 9999; /* ensure it's above everything */
-  background: transparent; /* optional: no background */
+  background: transparent; 
 }
 
 .fixed-bottom-right button {
@@ -218,3 +228,5 @@ input:checked + .slider:before {
   transform: scale(1.1);
   transition: transform 0.3s;
 }
+
+/*=== Timer Styles ===*/

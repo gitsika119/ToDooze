@@ -16,7 +16,7 @@ function applyTheme() {
   body.style.backgroundAttachment = "fixed";
   body.style.height = "100vh";
   body.style.width = "100vw";
-  body.style.overflow = "hidden";
+  body.style.overflowY = "auto";
 }
 
 function loadTasks() {
@@ -28,10 +28,11 @@ function saveTasks() {
   const tasks = [];
   document.querySelectorAll("#todo-list li").forEach(li => {
     tasks.push({
-      text: li.querySelector(".task-text").textContent,
-      starred: li.classList.contains("starred")
+  text: li.querySelector(".task-text").textContent,
+  starred: li.classList.contains("starred"),
+  done: li.classList.contains("done")
     });
-  });
+});
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
@@ -40,39 +41,89 @@ function addTaskToDOM(taskObj) {
 
   const li = document.createElement("li");
   if (taskObj.starred) li.classList.add("starred");
+  if (taskObj.done) li.classList.add("done");
 
   const textSpan = document.createElement("span");
   textSpan.className = "task-text";
   textSpan.textContent = taskObj.text;
 
   const starBtn = document.createElement("button");
-  starBtn.innerHTML = "⭐";
+  starBtn.style.backgroundImage = "url('assets/star1.png')";
+  starBtn.style.backgroundSize = "cover";
+  starBtn.style.width = "20px";
+  starBtn.style.height = "20px";
+  starBtn.style.border = "none";
+  starBtn.textContent = ""; // Make sure no text
   starBtn.title = "Star/Unstar";
   starBtn.onclick = () => {
     li.classList.toggle("starred");
     saveTasks();
   };
-
+const doneBtn = document.createElement("button");
+doneBtn.title = "Mark as Done";
+doneBtn.style.backgroundImage = "url('assets/check.png')";
+doneBtn.style.backgroundSize = "cover";
+doneBtn.style.width = "20px";
+doneBtn.style.height = "20px";
+doneBtn.style.border = "none";
+doneBtn.textContent = ""; // Make sure no text
+doneBtn.onclick = () => {
+  li.classList.toggle("done");
+  saveTasks();
+};
   const editBtn = document.createElement("button");
-  editBtn.textContent = "Edit";
-  editBtn.onclick = () => {
-    const newText = prompt("Edit your task:", textSpan.textContent);
-    if (newText !== null) {
-      textSpan.textContent = newText.trim();
-      saveTasks();
-    }
-  };
+editBtn.title = "Edit";
+editBtn.style.backgroundImage = "url('assets/edit.png')";
+editBtn.style.backgroundSize = "cover";
+editBtn.style.width = "20px";
+editBtn.style.height = "20px";
+editBtn.style.border = "none";
+editBtn.textContent = ""; // Make sure no text
+editBtn.onclick = () => {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = textSpan.textContent;
+  input.className = "edit-input";
+  input.style.fontSize = "16px";
+  input.style.flex = "1";
+  textSpan.replaceWith(input);
+  input.focus();
 
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-  deleteBtn.onclick = () => {
-    li.remove();
+  // Save on blur or Enter key
+  const saveEdit = () => {
+    const newText = input.value.trim();
+    if (newText !== "") {
+      textSpan.textContent = newText;
+    }
+    input.replaceWith(textSpan);
     saveTasks();
   };
 
+  input.addEventListener("blur", saveEdit);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      saveEdit();
+    }
+  });
+};
+
+const deleteBtn = document.createElement("button");
+deleteBtn.title = "Delete";
+deleteBtn.style.backgroundImage = "url('assets/delete.png')";
+deleteBtn.style.backgroundSize = "cover";
+deleteBtn.style.width = "20px";
+deleteBtn.style.height = "20px";
+deleteBtn.style.border = "none";
+deleteBtn.textContent = ""; // Remove text
+deleteBtn.onclick = () => {
+  li.remove();
+  saveTasks();
+};
+
+
   const btnGroup = document.createElement("div");
   btnGroup.className = "btn-group";
-  btnGroup.append(starBtn, editBtn, deleteBtn);
+  btnGroup.append(starBtn, doneBtn, editBtn, deleteBtn);
 
   li.append(textSpan, btnGroup);
   list.appendChild(li);
