@@ -32,3 +32,21 @@ toggleBtn.addEventListener('click', () => {
     localStorage.setItem('theme', 'day');
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const clickSound = document.getElementById("click-sound");
+  document.querySelectorAll('[sound="click"]').forEach(button => {
+    button.addEventListener("click", () => {
+      playClickSound();
+    });
+  });
+});
+
+function playClickSound(destination) {
+      const audio = document.getElementById('click-sound');
+      audio.currentTime = 0; // Restart sound if it's already playing
+      audio.play();
+      setTimeout(() => {
+        location.href = destination;
+      }, 100); // Slight delay so click sound plays before redirect
+    }

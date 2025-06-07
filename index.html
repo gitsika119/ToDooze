@@ -7,18 +7,19 @@
 <body>
   <!-- Top-left toggle -->
   <button class="top-left" id="theme-toggle">
-  <img id="toggle-icon" src="assets/dayswitch.png" alt="Toggle Theme">
+  <img id="toggle-icon" src="assets/dayswitch.png" alt="Toggle Theme"">
 </button>
   <!-- Centered buttons, moved lower -->
   <div class="button-container">
-    <button onclick="location.href='timer.html'">
+    <button onclick="playClickSound('timer.html')">
       <img src="assets/timerh.png" >
     </button>
-    <button onclick="location.href='todo.html'">
+    <button onclick="playClickSound('todo.html')">
       <img src="assets/todoh.png" >
     </button>
   </div>
-
   <script src="home.js"></script>
+  <audio id="click-sound" src="assets/click.wav" preload="auto"></audio>
+
 </body>
 </html>
