@@ -1,35 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Pixelify Sans', monospace;
+      text-align: center;
+      color: #111;
+    }
+
+    .container {
+      padding: 40px;
+    }
+
+    .timer-box {
+      margin-bottom: 40px;
+    }
+
+    .timer-display {
+      font-size: 48px;
+      margin: 10px 0;
+    }
+
+    .controls button {
+      margin: 0 5px;
+      padding: 8px 16px;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;  
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: none;
+      background-color: transparent;
+      border-radius: 100%;
+    }
+    .controls button:hover {
+      transform: scale(1.1);
+    }
+    .custom-time input {
+      width: 60px;
+      margin: 5px;
+      padding: 5px;
+    }
+
+    .custom-time button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;  
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: none;
+      background-color: transparent;
+      border-radius: 100%;
+    }
+
+    .fixed-bottom-right {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .fixed-bottom-right button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  </style>
 </head>
-<body class="timer-page">
-  
-  <div class="overlay"></div>
+<body>
   <div class="container">
-    <div class="timer-display" id="timer">25:00</div>
 
-    <div class="controls">
-      <button id="start"><img src="assets/play.png"></button>
-      <button id="pause"><img src="assets/pause.png"></button>
-      <button id="reset"><img src="assets/stop.png"></button>
+    <!-- 25-min Work Timer -->
+    <div class="timer-box">
+      <h2>25-Minute Work Timer</h2>
+      <div class="timer-display" id="work-timer">25:00</div>
+      <div class="controls">
+        <button onclick="startTimer('work')" style="background-image: url('assets/play.png');" sound="click"></button>
+        <button onclick="pauseTimer('work')" style="background-image: url('assets/pause.png');" sound="click"></button>
+        <button onclick="resetTimer('work')" style="background-image: url('assets/stop.png');" sound="click"></button>
+      </div>
     </div>
 
-    <div class="custom-time">
-      <label for="work">Work (min):</label>
-      <input type="number" id="work" value="25">
-      <label for="break">Break (min):</label>
-      <input type="number" id="break" value="5">
-      <button id="set-custom">Set Custom</button>
+    <!-- 5-min Break Timer -->
+    <div class="timer-box">
+      <h2>5-Minute Break Timer</h2>
+      <div class="timer-display" id="break-timer">05:00</div>
+      <div class="controls">
+        <button onclick="startTimer('break')" style="background-image: url('assets/play.png');" sound="click"></button>
+        <button onclick="pauseTimer('break')" style="background-image: url('assets/pause.png');" sound="click"></button>
+        <button onclick="resetTimer('break')" style="background-image: url('assets/stop.png');" sound="click"></button>
+      </div>
     </div>
 
-    <!-- Bottom-right navigation buttons -->
-  <div class="fixed-bottom-right">
-    <button><img src="assets/home.png" alt="Home" onclick="location.href='index.html'"></button>
-    <button><img src="assets/todo.png" alt="To-Do" onclick="location.href='todo.html'"></button>
+    <div class="timer-box">
+      <h2>Custom Timer</h2>
+      <div class="timer-display" id="custom-timer">00:00:00</div>
+      <div class="custom-time">
+        <input type="number" id="custom-hours" placeholder="hr" min="0" />
+        <input type="number" id="custom-minutes" placeholder="min" min="0" max="59" />
+        <input type="number" id="custom-seconds" placeholder="sec" min="0" max="59" />
+
+        <br />
+        <button onclick="setCustomTimer('custom')" style="background-image: url('assets/set.png');" sound="click"></button>
+        <button onclick="startTimer('custom')" style="background-image: url('assets/play.png');" sound="click"></button>
+        <button onclick="pauseTimer('custom')" style="background-image: url('assets/pause.png');" sound="click"></button>
+        <button onclick="resetTimer('custom')" style="background-image: url('assets/stop.png');" sound="click"></button>
+      </div>
+    </div>
+
+    <div class="fixed-bottom-right">
+      <button onclick="playClickSound('index.html')"><img src="assets/home.png" alt="Home" /></button>
+      <button onclick="playClickSound('todo.html')"><img src="assets/todo.png" alt="To-Do" /></button>
+    </div>
+  </div>
+  <div id="custom-alert" class="hidden">
+    <div class="alert-box">
+      <p id="alert-message"></p>
+      <button onclick="closeCustomAlert()" sound="click">OK</button>
+    </div>
   </div>
 
   <script src="timer.js"></script>
+  <audio id="alarm-sound" src="assets/alarm.mp3" preload="auto"></audio>
+  <audio id="click-sound" src="assets/click.wav" preload="auto"></audio>
+
 </body>
 </html>
