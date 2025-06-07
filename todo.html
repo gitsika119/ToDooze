@@ -17,9 +17,11 @@
   </div>
 <!-- Bottom-right navigation buttons -->
   <div class="fixed-bottom-right">
-    <button><img src="assets/home.png" alt="Home" onclick="location.href='index.html'"></button>
-    <button><img src="assets/timer.png" alt="Timer" onclick="location.href='timer.html'"></button>
+    <button><img src="assets/home.png" alt="Home" onclick="playClickSound('index.html')"></button>
+    <button><img src="assets/timer.png" alt="Timer" onclick="playClickSound('timer.html')"></button>
   </div>
   <script src="todo.js"></script>
+    <audio id="click-sound" src="assets/click.wav" preload="auto"></audio>
+
 </body>
 </html>

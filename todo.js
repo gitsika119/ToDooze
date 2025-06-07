@@ -58,6 +58,9 @@ function addTaskToDOM(taskObj) {
   starBtn.onclick = () => {
     li.classList.toggle("starred");
     saveTasks();
+    sound= document.getElementById("click-sound");
+    sound.currentTime = 0; 
+    sound.play();
   };
 const doneBtn = document.createElement("button");
 doneBtn.title = "Mark as Done";
@@ -70,6 +73,9 @@ doneBtn.textContent = ""; // Make sure no text
 doneBtn.onclick = () => {
   li.classList.toggle("done");
   saveTasks();
+  sound = document.getElementById("click-sound");
+  sound.currentTime = 0;
+  sound.play();
 };
   const editBtn = document.createElement("button");
 editBtn.title = "Edit";
@@ -80,6 +86,9 @@ editBtn.style.height = "20px";
 editBtn.style.border = "none";
 editBtn.textContent = ""; // Make sure no text
 editBtn.onclick = () => {
+  sound = document.getElementById("click-sound");
+  sound.currentTime = 0;
+  sound.play();
   const input = document.createElement("input");
   input.type = "text";
   input.value = textSpan.textContent;
@@ -118,6 +127,9 @@ deleteBtn.textContent = ""; // Remove text
 deleteBtn.onclick = () => {
   li.remove();
   saveTasks();
+  sound = document.getElementById("click-sound");
+  sound.currentTime = 0;
+  sound.play();
 };
 
 
@@ -141,6 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (addBtn) {
     addBtn.onclick = () => {
       const task = input.value.trim();
+      sound = document.getElementById("click-sound");
+      sound.currentTime = 0;
+      sound.play();
       if (task) {
         addTaskToDOM({ text: task, starred: false });
         saveTasks();
@@ -150,3 +165,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const clickSound = document.getElementById("click-sound");
+
+  // Play click sound for all buttons with sound="click"
+  document.querySelectorAll('[sound="click"]').forEach(button => {
+    button.addEventListener("click", () => {
+      if (clickSound) {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(err => {
+          console.warn("Click sound failed:", err);
+        });
+      }
+    });
+  });
+});
+
+function playClickSound(destination) {
+      const audio = document.getElementById('click-sound');
+      audio.currentTime = 0; // Restart sound if it's already playing
+      audio.play();
+      setTimeout(() => {
+        location.href = destination;
+      }, 100); // Slight delay so click sound plays before redirect
+    }

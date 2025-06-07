@@ -21,6 +21,9 @@ applyTheme(); // Apply on page load
 
 // On toggle button click
 toggleBtn.addEventListener('click', () => {
+  sound = document.getElementById("click-sound");
+  sound.currentTime = 0;
+  sound.play();
   const nightMode = body.classList.toggle('night');
   if (nightMode) {
     body.style.backgroundImage = "url('assets/homen.png')";
