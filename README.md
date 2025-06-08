@@ -42,4 +42,4 @@ npm start
 </li><br></ol>
 
 ## How it should run:
-
+<p><img src="assets/ss.png" style="float:right;width:420px;height:420px;"></p>
