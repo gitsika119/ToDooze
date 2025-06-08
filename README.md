@@ -25,3 +25,21 @@ The app consists of 3 pages: A home page, a timer page and a To-Do list page. Ea
 <li> Buttons to Home and Timer page </li>
 </ul>
 <br>Tasks are stored in localStorage 
+
+## How to use:
+There are two ways you could use the app:
+<ol> <li>On cmd run the following, it will run the app in development mode via Electron <br>
+  
+```
+git clone https://github.com/gitsika119/sidequesting.git
+cd sidequesting
+npm install
+npm start 
+```
+</li>
+<li>
+  (Better way) Download installer from Releases, install and run it (Will need to click more info/ run anyway because I'm an unidentified publisher). The app will install and run. After that you can delete the installer and search up the app and run it :)
+</li><br></ol>
+
+## How it should run:
+
