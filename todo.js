@@ -38,12 +38,8 @@ function saveTasks() {
 
 function addTaskToDOM(taskObj) {
   const list = document.getElementById("todo-list");
-
   const li = document.createElement("li");
-  if (taskObj.starred) li.classList.add("starred");
-  if (taskObj.done) li.classList.add("done");
-
-  const textSpan = document.createElement("span");
+    const textSpan = document.createElement("span");
   textSpan.className = "task-text";
   textSpan.textContent = taskObj.text;
 
@@ -56,12 +52,18 @@ function addTaskToDOM(taskObj) {
   starBtn.textContent = ""; // Make sure no text
   starBtn.title = "Star/Unstar";
   starBtn.onclick = () => {
-    li.classList.toggle("starred");
-    saveTasks();
-    sound= document.getElementById("click-sound");
-    sound.currentTime = 0; 
-    sound.play();
-  };
+  li.classList.toggle("starred");
+  const starred = li.classList.contains("starred");
+  starBtn.style.backgroundImage = starred 
+    ? "url('assets/star1.png')" 
+    : "url('assets/star2.png')";
+  saveTasks();
+  const sound = document.getElementById("click-sound");
+  sound.currentTime = 0; 
+  sound.play();
+};
+
+
 const doneBtn = document.createElement("button");
 doneBtn.title = "Mark as Done";
 doneBtn.style.backgroundImage = "url('assets/check.png')";
@@ -72,11 +74,27 @@ doneBtn.style.border = "none";
 doneBtn.textContent = ""; // Make sure no text
 doneBtn.onclick = () => {
   li.classList.toggle("done");
+  const done = li.classList.contains("done");
+  doneBtn.style.backgroundImage = done 
+    ? "url('assets/check.png')" 
+    : "url('assets/check1.png')";
   saveTasks();
-  sound = document.getElementById("click-sound");
+  const sound = document.getElementById("click-sound");
   sound.currentTime = 0;
   sound.play();
 };
+if (taskObj.starred) {
+  li.classList.add("starred");
+  starBtn.style.backgroundImage = "url('assets/star1.png')";
+} else {
+  starBtn.style.backgroundImage = "url('assets/star2.png')";
+}
+  if (taskObj.done) {
+  li.classList.add("done");
+  doneBtn.style.backgroundImage = "url('assets/check.png')";
+} else {
+  doneBtn.style.backgroundImage = "url('assets/check1.png')";
+}
   const editBtn = document.createElement("button");
 editBtn.title = "Edit";
 editBtn.style.backgroundImage = "url('assets/edit.png')";
@@ -86,6 +104,7 @@ editBtn.style.height = "20px";
 editBtn.style.border = "none";
 editBtn.textContent = ""; // Make sure no text
 editBtn.onclick = () => {
+  editBtn.style.backgroundImage = "url('assets/edit.png')";
   sound = document.getElementById("click-sound");
   sound.currentTime = 0;
   sound.play();
@@ -100,6 +119,7 @@ editBtn.onclick = () => {
 
   // Save on blur or Enter key
   const saveEdit = () => {
+    editBtn.style.backgroundImage = "url('assets/edit1.png')";
     const newText = input.value.trim();
     if (newText !== "") {
       textSpan.textContent = newText;
@@ -118,7 +138,7 @@ editBtn.onclick = () => {
 
 const deleteBtn = document.createElement("button");
 deleteBtn.title = "Delete";
-deleteBtn.style.backgroundImage = "url('assets/delete.png')";
+deleteBtn.style.backgroundImage = "url('assets/trash.png')";
 deleteBtn.style.backgroundSize = "cover";
 deleteBtn.style.width = "20px";
 deleteBtn.style.height = "20px";
@@ -131,7 +151,12 @@ deleteBtn.onclick = () => {
   sound.currentTime = 0;
   sound.play();
 };
-
+deleteBtn.addEventListener("mouseover", () => {
+  deleteBtn.style.backgroundImage = "url('assets/trash1.png')";
+});
+deleteBtn.addEventListener("mouseout", () => {
+  deleteBtn.style.backgroundImage = "url('assets/trash.png')";
+});
 
   const btnGroup = document.createElement("div");
   btnGroup.className = "btn-group";
