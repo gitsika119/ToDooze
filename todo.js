@@ -42,7 +42,7 @@ function addTaskToDOM(taskObj) {
     const textSpan = document.createElement("span");
   textSpan.className = "task-text";
   textSpan.textContent = taskObj.text;
-
+  li.style.backgroundColor = "rgba(255, 255, 255, 1)";
   const starBtn = document.createElement("button");
   starBtn.style.backgroundImage = "url('assets/star1.png')";
   starBtn.style.backgroundSize = "cover";
@@ -143,7 +143,7 @@ deleteBtn.style.backgroundSize = "cover";
 deleteBtn.style.width = "20px";
 deleteBtn.style.height = "20px";
 deleteBtn.style.border = "none";
-deleteBtn.textContent = ""; // Remove text
+deleteBtn.textContent = ""; 
 deleteBtn.onclick = () => {
   li.remove();
   saveTasks();
